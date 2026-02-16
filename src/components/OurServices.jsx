@@ -2,7 +2,7 @@ export default function OurServices() {
   const services = [
     {
       id: 1,
-      icon: "/images/bookonline.png",
+      icon: "/images/image1.png",
       title: "Concierge Integrative Medicine Care",
       description: "Personalized, comprehensive care with longer appointments and direct access to your care team.",
       link: "#",
@@ -10,7 +10,7 @@ export default function OurServices() {
     },
     {
       id: 2,
-      icon: "/images/services.png",
+      icon: "/images/image3.png",
       title: "Acupuncture | Chinese Medicine",
       description: "Acupuncture and Chinese Medicine have been used for thousands of years to treat a wide range of conditions.",
       link: "#",
@@ -18,7 +18,7 @@ export default function OurServices() {
     },
     {
       id: 3,
-      icon: "/images/exceptionalproviders.png",
+      icon: "/images/image2.png",
       title: "Integrative Geriatric Consultations",
       description: "Personalized, comprehensive care for seniors, focusing on quality of life and well-being.",
       link: "#",
@@ -26,7 +26,7 @@ export default function OurServices() {
     },
     {
       id: 4,
-      icon: "/images/group.png",
+      icon: "/images/image4.png",
       title: "Courses & Medical and Support Groups",
       description: "Educational programs and support groups to empower your health journey.",
       link: "#",
@@ -59,7 +59,7 @@ export default function OurServices() {
                 <img 
                   src={service.icon} 
                   alt={service.title}
-                  className="w-32 h-32 object-contain transition-transform duration-300 group-hover:scale-105"
+                  className="w-48 h-48 object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
 

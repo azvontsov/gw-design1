@@ -2,22 +2,22 @@ export default function NewsEvents() {
   const newsItems = [
     {
       id: 1,
-      category: "MENTAL HEALTH",
-      title: "Care for your mental health",
+      category: "Mindfulness",
+      title: "A Mindfulness Experience",
       image: "/images/feeling-better.png",
       link: "#"
     },
     {
       id: 2,
-      category: "ANNUAL WELLNESS",
-      title: "The annual physical, reimagined",
+      category: "Healing Foods",
+      title: "Emergency Chicken Soup: Healing in a Bowl",
       image: "/images/live-well.png",
       link: "#"
     },
     {
       id: 3,
-      category: "AMAZON PHARMACY",
-      title: "Finally, a pharmacy that really delivers",
+      category: "Long COVID",
+      title: "What Can You Do About Long COVID?",
       image: "/images/mindset.png",
       link: "#"
     }
