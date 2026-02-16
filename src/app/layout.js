@@ -14,7 +14,7 @@ const gtSuper = localFont({
       style: "normal",
     },
     {
-      path: "../../public/fonts/GT-Super-Display-Medium-Trial.otf",
+      path: "../../public/fonts/gt-super-display-medium.woff2",
       weight: "500",
       style: "normal",
     },
