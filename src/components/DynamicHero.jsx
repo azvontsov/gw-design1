@@ -42,7 +42,7 @@ export default function DynamicHero() {
     <section className="py-4 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto text-center">
         <h2 
-          className="text-5xl md:text-7xl lg:text-[88px] text-[var(--gw-primary)] relative z-30 bg-white"
+          className="text-5xl md:text-6xl lg:text-[72px] text-[var(--gw-primary)] relative z-30 bg-white"
           style={{ 
             fontFamily: 'var(--font-gt-super)', 
             fontWeight: 700,
@@ -54,7 +54,7 @@ export default function DynamicHero() {
         
         {/* Rotating Wheel Container - matched to line height with strict mask */}
         <div 
-          className="relative h-[66px] md:h-[86px] lg:h-[106px] overflow-hidden mb-8 z-20"
+          className="relative h-[66px] md:h-[76px] lg:h-[86px] overflow-hidden mb-8 z-20"
           style={{ isolation: 'isolate', clipPath: 'inset(0)' }}
         >
           <div 
@@ -67,20 +67,13 @@ export default function DynamicHero() {
             {/* The NEXT item (positioned above, slides in) */}
             <div className="absolute top-[-100%] w-full h-full flex items-center justify-center">
               <h2 
-                className="text-5xl md:text-7xl lg:text-[88px] text-[var(--gw-secondary)] whitespace-nowrap"
+                className="text-5xl md:text-6xl lg:text-[72px] text-[var(--gw-secondary)] whitespace-nowrap"
                 style={{ 
                   fontFamily: 'var(--font-gt-super)', 
                   fontWeight: 700,
                   lineHeight: '1.2'
                 }}
               >
-                {/* 
-                   To go from Index 0 -> Index 1:
-                   Index 0 is at 0.
-                   Index 1 is at -100%.
-                   We slide container DOWN (translateY 100%), 
-                   so Index 1 comes to 0 and Index 0 goes to 100%.
-                */}
                 {topics[(currentIndex + 1) % topics.length]}
               </h2>
             </div>
@@ -88,7 +81,7 @@ export default function DynamicHero() {
             {/* The CURRENT item (at 0, slides out to bottom) */}
             <div className="absolute top-0 w-full h-full flex items-center justify-center">
               <h2 
-                className="text-5xl md:text-7xl lg:text-[88px] text-[var(--gw-secondary)] whitespace-nowrap"
+                className="text-5xl md:text-6xl lg:text-[72px] text-[var(--gw-secondary)] whitespace-nowrap"
                 style={{ 
                   fontFamily: 'var(--font-gt-super)', 
                   fontWeight: 700,

@@ -6,6 +6,7 @@ import MembershipSection from "@/components/MembershipSection";
 import NewsEvents from "@/components/NewsEvents";
 import OurServices from "@/components/OurServices";
 import DynamicHero from "@/components/DynamicHero";
+import Providers from "@/components/Providers";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <NewsEvents />
         <DynamicHero />
         <OurServices />
+        <Providers />
         {/* <MembershipSection /> */}
       </main>
       <Footer />

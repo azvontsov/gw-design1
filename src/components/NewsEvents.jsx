@@ -27,21 +27,21 @@ export default function NewsEvents() {
     <section className="py-16 lg:py-24 2xl:py-32 bg-[var(--gw-mint)]">
       <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-12 2xl:px-24">
         {/* Section Header */}
-        <div className="mb-16 2xl:mb-24 px-2">
-          <h2 className="text-4xl lg:text-6xl 2xl:text-7xl font-medium text-[var(--gw-primary)] mb-4">
+        <div className="mb-12 lg:mb-16 px-2">
+          <h2 className="text-4xl lg:text-5xl font-medium text-[var(--gw-primary)] mb-4">
             News and Events
           </h2>
         </div>
 
         {/* News Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 2xl:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {newsItems.map((item) => (
             <div 
               key={item.id} 
               className="group cursor-pointer flex flex-col"
             >
               {/* Image with proportional scaling */}
-              <div className="relative aspect-[4/3] w-full mb-6 2xl:mb-10 overflow-hidden rounded-2xl bg-gray-200">
+              <div className="relative aspect-[4/3] w-full mb-6 overflow-hidden rounded-2xl bg-gray-200">
                 <img 
                   src={item.image} 
                   alt={item.title}
@@ -52,12 +52,12 @@ export default function NewsEvents() {
               {/* Content */}
               <div className="px-2">
                 {/* Category */}
-                <p className="text-[var(--gw-secondary)] text-xs 2xl:text-sm font-bold uppercase tracking-wider mb-3 2xl:mb-5">
+                <p className="text-[var(--gw-secondary)] text-xs font-bold uppercase tracking-wider mb-3">
                   {item.category}
                 </p>
 
                 {/* Title */}
-                <h3 className="text-3xl lg:text-4xl 2xl:text-5xl font-serif text-[var(--gw-primary)] mb-4 2xl:mb-8 leading-tight group-hover:text-[var(--gw-secondary)] transition-colors duration-300">
+                <h3 className="text-2xl lg:text-3xl font-serif text-[var(--gw-primary)] mb-4 leading-tight group-hover:text-[var(--gw-secondary)] transition-colors duration-300">
                   {item.title}
                 </h3>
 

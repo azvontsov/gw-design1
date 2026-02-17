@@ -21,7 +21,7 @@ export default function Hero() {
           <div 
             className={`max-w-xl xl:max-w-2xl px-4 sm:px-6 lg:px-8 xl:pl-32 pt-20 pb-12 lg:pt-32 lg:pb-32 transition-all duration-1000 delay-300 ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}
           >
-            <h1 className="text-5xl font-medium tracking-normal text-[var(--gw-white)] sm:text-[72px] mb-6 leading-[1.1]">
+            <h1 className="text-5xl font-medium tracking-normal text-[var(--gw-white)] lg:text-[64px] mb-6 leading-[1.1]">
               GW Center for Integrative Medicine
             </h1>
             <p className="mt-6 text-xl text-[var(--gw-white)] leading-relaxed max-w-lg">
