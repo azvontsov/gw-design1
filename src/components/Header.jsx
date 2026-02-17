@@ -3,10 +3,136 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
+const menuItems = [
+  {
+    title: "Services",
+    href: "#",
+    submenu: [
+      { title: "All Services", href: "#" },
+      {
+        title: "Consultations",
+        href: "#",
+        submenu: [
+          { title: "Integrative Geriatrics", href: "#" },
+          { title: "Naturopathic Medicine", href: "#" },
+          { title: "Functional Medicine", href: "#" },
+          { title: "Integrative Mental Health", href: "#" },
+          { title: "Sarno/Mind-Body Method", href: "#" },
+          { title: "Pediatric and Adolescent Integrative Medicine Consultations", href: "#" },
+          { title: "Medical Cannabis", href: "#" },
+          { title: "Nutritional Counseling", href: "#" },
+        ]
+      },
+      {
+        title: "Treatments",
+        href: "#",
+        submenu: [
+          { title: "Intravenouse Therapy", href: "#" },
+          { title: "Mistletoe Injection Therapy for Cancer", href: "#" },
+          { title: "Acupuncture and Chinese medicine", href: "#" },
+          { title: "Microneedling and Facial Acupuncture", href: "#" },
+          { title: "Reiki", href: "#" },
+          { title: "Somatic Experiencing", href: "#" },
+          { title: "KAP Assisted Psychotherapy", href: "#" },
+        ]
+      },
+      {
+        title: "Programs",
+        href: "#",
+        submenu: [
+          { title: "Concierge Integrative Medicine Care", href: "#" },
+          { title: "Reversal of Cognitive Decline ReCODE (TM)", href: "#" },
+          { title: "Long Covid", href: "#" },
+          { title: "Shoemaker Protocol for CIRS and Mold Toxicity", href: "#" },
+          { title: "Mindfulness Based Stress Reduction MBSR", href: "#" },
+          { title: "Weight/Body Composition", href: "#" },
+          { title: "Executive Coaching", href: "#" },
+        ]
+      },
+      {
+        title: "Ongoing Groups",
+        href: "#",
+        submenu: [
+           { title: "Long COVID Medical online Groups", href: "#" },
+           { title: "ReCODE Support Group", href: "#" },
+        ]
+      }
+    ]
+  },
+  {
+    title: "Conditions",
+    href: "#",
+    submenu: [
+      { title: "Chronic Illness", href: "#" },
+      { title: "Pain and Fatigue", href: "#" },
+      { title: "Mental Health", href: "#" },
+      { title: "CIRS and Mold Toxicity Illness", href: "#" },
+      { title: "Healthy Aging", href: "#" },
+      { title: "Cancer", href: "#" },
+      { title: "EDS and HSD", href: "#" },
+    ]
+  },
+  {
+    title: "Team",
+    href: "#",
+    submenu: [
+      { title: "Integrative Health Care Specialists", href: "#" },
+      { title: "Providers Affiliated with GWCIM", href: "#" },
+      { title: "Our Partners", href: "#" },
+    ]
+  },
+  {
+    title: "Appointments and Information",
+    href: "#",
+    submenu: [
+      { title: "Appointments", href: "#" },
+      { title: "Fees, Cancellation, Insurance", href: "#" },
+      { title: "ChARM Patient Portal", href: "#" },
+      { title: "Fullscript Supplements Store", href: "#" },
+      { title: "Integrative Medicine Resources", href: "#" },
+    ]
+  },
+  {
+      title: "News",
+      href: "#",
+      submenu: [
+          { title: "News & Events Main", href: "#" },
+          { title: "Sign Up for GWCIM Newsletter", href: "#" },
+          { title: "Dr Kogan’s YouTube channel", href: "#" },
+          { title: "Dr. Kogan’s Medical Marijuana Book", href: "#" },
+          { title: "The GWCIM Nirmal Goyal Cancer Fund", href: "#" },
+          { title: "“Integrative Geriatrics” Book", href: "#" },
+          { title: "GWCIM Virtual Open Houses", href: "#" },
+      ]
+  },
+  {
+      title: "About",
+      href: "#",
+      submenu: [
+          { title: "GW Center for Integrative Medicine: Mission Statement and Director’s Message", href: "#" },
+          { title: "What is Integrative Medicine", href: "#" },
+          { title: "Our Story", href: "#" },
+          { title: "Patient Reviews and Testimonials", href: "#" },
+      ]
+  },
+  {
+      title: "Contact",
+      href: "#"
+  }
+];
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openSubmenu, setOpenSubmenu] = useState(null);
+  // Track open submenus in mobile view by hierarchical path, e.g., "Services", "Services/Consultations"
+  const [openSubmenus, setOpenSubmenus] = useState({});
+
+  const toggleSubmenu = (path) => {
+    setOpenSubmenus(prev => ({
+      ...prev,
+      [path]: !prev[path]
+    }));
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +155,63 @@ export default function Header() {
       document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
+
+  // Recursively render mobile menu items
+  const renderMobileMenuItem = (item, parentPath = '') => {
+      const path = parentPath ? `${parentPath}/${item.title}` : item.title;
+      const isOpen = openSubmenus[path];
+      const hasSubmenu = item.submenu && item.submenu.length > 0;
+
+      return (
+          <div key={path} className="w-full flex flex-col">
+               <div className="flex items-center justify-between py-2">
+                   {(item.href && (item.href !== '#' || !hasSubmenu)) ? (
+                        <Link 
+                            href={item.href} 
+                            onClick={() => !hasSubmenu && setIsMenuOpen(false)}
+                            className="text-xl md:text-2xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors leading-tight"
+                        >
+                            {item.title}
+                        </Link>
+                   ) : (
+                        <button 
+                             onClick={() => toggleSubmenu(path)}
+                             className="text-xl md:text-2xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors leading-tight text-left"
+                        >
+                             {item.title}
+                        </button>
+                   )}
+                   
+                   {hasSubmenu && (
+                        <button 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                toggleSubmenu(path);
+                            }}
+                            className="p-2 ml-2"
+                        >
+                             <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                viewBox="0 0 20 20" 
+                                fill="currentColor" 
+                                className={`w-6 h-6 text-white transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                             >
+                                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                             </svg>
+                        </button>
+                   )}
+               </div>
+               
+               {hasSubmenu && (
+                    <div className={`overflow-hidden transition-all duration-300 ease-in-out pl-4 border-l border-[rgba(255,255,255,0.1)] ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                         <div className="flex flex-col gap-1 py-1">
+                             {item.submenu.map(subItem => renderMobileMenuItem(subItem, path))}
+                         </div>
+                    </div>
+               )}
+          </div>
+      );
+  };
 
   return (
     <>
@@ -75,12 +258,6 @@ export default function Header() {
                         </a>
                 </div>
             </div>
-             {/* Mobile Hamburger (visible only on mobile, right aligned next to logo effectively in row 1 if we wanted, but user asked for logic for second line only. 
-                 However, if we hide the second line, we need the hamburger somewhere. 
-                 Let's put the hamburger in the second line container on mobile, but since we are stacking, let's just keep it simple.
-                 Actually, often double navs collapse to single on mobile.
-                 I will put the hamburger in the main flexible row for mobile.
-              */}
         </div>
       </div>
 
@@ -107,32 +284,88 @@ export default function Header() {
           </div>
 
           {/* Navigation Column - Centered between columns */}
-          <nav className="flex-1 flex items-center justify-center gap-4 xl:gap-5 2xl:gap-11">
-            {['Services', 'Conditions', 'Team', 'Appointments & Information', 'News', 'About'].map((item) => (
-              <div key={item} className="relative group">
-                <Link href="#" className="flex items-center gap-1 text-[14px] xl:text-[15px] font-bold text-[var(--gw-primary)] hover:text-[var(--gw-secondary)] py-4 whitespace-nowrap">
-                  {item}
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 transition-transform group-hover:rotate-180 flex-shrink-0">
-                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-                  </svg>
-                </Link>
+          <nav className="flex-1 flex items-center justify-center gap-4 xl:gap-5 2xl:gap-8">
+            {menuItems.map((item, index) => {
+                const hasSubmenu = item.submenu && item.submenu.length > 0;
                 
-                {item === 'Services' && (
-                  <div className="absolute top-full -left-4 w-56 bg-white shadow-lg rounded-md border border-gray-100 hidden group-hover:block z-50 p-2">
-                     <div className="flex flex-col gap-1">
-                        <Link href="#" className="px-4 py-2 hover:bg-[var(--gw-light-blue)] text-[var(--gw-primary)] text-sm font-medium rounded-md">All Services</Link>
-                        <Link href="#" className="px-4 py-2 hover:bg-[var(--gw-light-blue)] text-[var(--gw-primary)] text-sm font-medium rounded-md">Consultations</Link>
-                        <Link href="#" className="px-4 py-2 hover:bg-[var(--gw-light-blue)] text-[var(--gw-primary)] text-sm font-medium rounded-md">Treatments</Link>
-                        <Link href="#" className="px-4 py-2 hover:bg-[var(--gw-light-blue)] text-[var(--gw-primary)] text-sm font-medium rounded-md">Programs</Link>
-                        <Link href="#" className="px-4 py-2 hover:bg-[var(--gw-light-blue)] text-[var(--gw-primary)] text-sm font-medium rounded-md">Ongoing Groups</Link>
-                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-            <Link href="#" className="text-[14px] xl:text-[15px] font-bold text-[var(--gw-primary)] hover:text-[var(--gw-secondary)] whitespace-nowrap">
-              Contact
-            </Link>
+                return (
+                    <div key={index} className="relative group">
+                        {item.href ? (
+                            <Link href={item.href} className="flex items-center gap-1 text-[14px] xl:text-[15px] font-bold text-[var(--gw-primary)] hover:text-[var(--gw-secondary)] py-8 whitespace-nowrap">
+                                {item.title}
+                                {hasSubmenu && (
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 transition-transform group-hover:rotate-180 flex-shrink-0">
+                                        <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                    </svg>
+                                )}
+                            </Link>
+                        ) : (
+                            <button className="flex items-center gap-1 text-[14px] xl:text-[15px] font-bold text-[var(--gw-primary)] hover:text-[var(--gw-secondary)] py-8 whitespace-nowrap cursor-pointer">
+                                {item.title}
+                                {hasSubmenu && (
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 transition-transform group-hover:rotate-180 flex-shrink-0">
+                                        <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                    </svg>
+                                )}
+                            </button>
+                        )}
+                        
+                        {/* Level 1 Submenu */}
+                        {hasSubmenu && (
+                            <div className="absolute top-[90%] left-0 min-w-[260px] bg-white shadow-xl rounded-b-md border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 transform translate-y-2 group-hover:translate-y-0">
+                                <div className="py-2">
+                                    {item.submenu.map((subItem, subIndex) => {
+                                        const hasDeepSubmenu = subItem.submenu && subItem.submenu.length > 0;
+                                        return (
+                                            <div key={subIndex} className="relative group/sub px-2">
+                                                {subItem.href ? (
+                                                     <Link 
+                                                        href={subItem.href} 
+                                                        className="flex items-center justify-between px-4 py-2 text-[14px] text-[var(--gw-primary)] hover:text-[var(--gw-primary)] hover:bg-[var(--gw-green)] hover:font-bold rounded-md transition-colors"
+                                                     >
+                                                        {subItem.title}
+                                                        {hasDeepSubmenu && (
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 transform -rotate-90">
+                                                                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                                            </svg>
+                                                        )}
+                                                     </Link>
+                                                ) : (
+                                                    <div className="flex items-center justify-between px-4 py-2 text-[14px] text-[var(--gw-primary)] hover:text-[var(--gw-primary)] hover:bg-[var(--gw-green)] hover:font-bold rounded-md transition-colors cursor-default">
+                                                        {subItem.title}
+                                                         {hasDeepSubmenu && (
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 transform -rotate-90">
+                                                                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                                                            </svg>
+                                                        )}
+                                                    </div>
+                                                )}
+
+                                                {/* Level 2 Submenu (Flyout) */}
+                                                {hasDeepSubmenu && (
+                                                    <div className="absolute top-0 left-full ml-1 min-w-[260px] bg-white shadow-xl rounded-md border border-gray-100 opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-200 z-50 transform translate-x-2 group-hover/sub:translate-x-0">
+                                                        <div className="py-2 px-2">
+                                                            {subItem.submenu.map((deepSubItem, deepSubIndex) => (
+                                                                <Link 
+                                                                    key={deepSubIndex}
+                                                                    href={deepSubItem.href || '#'} 
+                                                                    className="block px-4 py-2 text-[14px] text-[var(--gw-primary)] hover:text-[var(--gw-primary)] hover:bg-[var(--gw-green)] hover:font-bold rounded-md transition-colors"
+                                                                >
+                                                                    {deepSubItem.title}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                );
+            })}
           </nav>
 
           {/* Spacer Column - Balances the logo to keep navigation centered */}
@@ -210,70 +443,8 @@ export default function Header() {
                 {/* Menu Content */}
                 <div className="flex-1 px-6 py-12 flex flex-col gap-12">
                     {/* Main Links */}
-                    <div className="flex flex-col items-start gap-0">
-                        {/* Services - Expandable */}
-                        <div className="w-full">
-                          <button 
-                            onClick={() => setOpenSubmenu(openSubmenu === 'services' ? null : 'services')}
-                            className="w-full text-left text-4xl md:text-5xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors leading-tight py-1 flex items-center justify-between"
-                          >
-                            Services
-                            <svg 
-                              xmlns="http://www.w3.org/2000/svg" 
-                              viewBox="0 0 20 20" 
-                              fill="currentColor" 
-                              className={`w-8 h-8 transition-transform duration-300 ${openSubmenu === 'services' ? 'rotate-180' : ''}`}
-                            >
-                              <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-                            </svg>
-                          </button>
-                          <div 
-                            className={`overflow-hidden transition-all duration-300 ease-in-out ${openSubmenu === 'services' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
-                          >
-                            <div className="pl-4 pt-4 flex flex-col gap-2">
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">All Services</Link>
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">Consultations</Link>
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">Treatments</Link>
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">Programs</Link>
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">Ongoing Groups</Link>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Conditions - Expandable */}
-                        <div className="w-full">
-                          <button 
-                            onClick={() => setOpenSubmenu(openSubmenu === 'conditions' ? null : 'conditions')}
-                            className="w-full text-left text-4xl md:text-5xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors leading-tight py-1 flex items-center justify-between"
-                          >
-                            Conditions
-                            <svg 
-                              xmlns="http://www.w3.org/2000/svg" 
-                              viewBox="0 0 20 20" 
-                              fill="currentColor" 
-                              className={`w-8 h-8 transition-transform duration-300 ${openSubmenu === 'conditions' ? 'rotate-180' : ''}`}
-                            >
-                              <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-                            </svg>
-                          </button>
-                          <div 
-                            className={`overflow-hidden transition-all duration-300 ease-in-out ${openSubmenu === 'conditions' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
-                          >
-                            <div className="pl-4 pt-4 flex flex-col gap-2">
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">Chronic Pain</Link>
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">Digestive Health</Link>
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">Mental Health</Link>
-                              <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-xl font-sans text-[var(--gw-secondary-light)] hover:text-white transition-colors py-2">Women's Health</Link>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Other menu items without submenus */}
-                        <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-4xl md:text-5xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors text-left leading-tight py-1">Team</Link>
-                        <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-4xl md:text-5xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors text-left leading-tight py-1">Appointments</Link>
-                        <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-4xl md:text-5xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors text-left leading-tight py-1">News</Link>
-                        <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-4xl md:text-5xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors text-left leading-tight py-1">About</Link>
-                        <Link href="#" onClick={() => setIsMenuOpen(false)} className="text-4xl md:text-5xl font-serif text-white hover:text-[var(--gw-secondary-light)] transition-colors text-left leading-tight py-1">Contact</Link>
+                    <div className="flex flex-col items-start gap-0 w-full">
+                        {menuItems.map(item => renderMobileMenuItem(item))}
                     </div>
 
                     {/* Secondary/Footer Section */}
