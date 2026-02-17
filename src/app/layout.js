@@ -47,7 +47,13 @@ export const metadata = {
   title: "GW Center for Integrative Medicine | Holistic Healthcare in DC",
   description: "The GW Center for Integrative Medicine provides comprehensive, personalized holistic healthcare in Washington DC with over 25 integrative medicine services.",
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icons/logo.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/icons/logo.svg' },
+    ],
   },
 };
 
