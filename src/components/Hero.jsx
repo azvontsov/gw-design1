@@ -45,19 +45,25 @@ export default function Hero() {
               style={{ filter: "drop-shadow(0 25px 40px rgba(0,0,0,0.4))" }}
             >
               {/* Container Shape: Full width Shield on Mobile, Bookmark on Desktop */}
-              <div className="w-full aspect-video lg:aspect-auto lg:w-[280px] lg:h-[420px] xl:w-[320px] xl:h-[480px] bg-black relative overflow-hidden transition-transform duration-500 lg:group-hover:-translate-y-2 rounded-none lg:rounded-none lg:[clip-path:polygon(0_0,100%_0,100%_100%,50%_85%,0_100%)]">
+                                          <div className="w-full aspect-video lg:aspect-auto lg:w-[130px] lg:h-[180px] lg:group-hover:w-[280px] lg:group-hover:h-[420px] xl:group-hover:w-[320px] xl:group-hover:h-[480px] bg-black lg:bg-[#E62B1E] lg:group-hover:bg-black relative overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] lg:group-hover:-translate-y-2 rounded-none lg:rounded-none lg:[clip-path:polygon(0_0,100%_0,100%_100%,50%_85%,0_100%)]">
                 {/* Background Image */}
                 <img
                   src="/images/TED.png"
                   alt="TEDx Talk"
-                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-all duration-700"
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 lg:opacity-20 mix-blend-normal lg:mix-blend-multiply lg:group-hover:opacity-80 lg:group-hover:mix-blend-normal transition-all duration-700"
                 />
 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/20 to-black/90"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/20 to-black/90 lg:via-black/10 lg:to-black/40 lg:group-hover:via-black/20 lg:group-hover:to-black/90 transition-all duration-700"></div>
 
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center pt-8 pb-12 lg:pb-16 px-6 text-center">
+                {/* Collapsed State Content (Visible initially on Desktop ONLY) */}
+                <div className="absolute inset-0 hidden lg:flex flex-col items-center justify-end pb-8 opacity-100 group-hover:opacity-0 transition-all duration-500">
+                   <span className="text-white/90 font-bold text-2xl tracking-tighter rotate-0">TEDx</span>
+                   <div className="w-1 h-1 bg-white rounded-full mt-2 animate-pulse"></div>
+                </div>
+
+                {/* Expanded State Content (Visible on Hover for Desktop, Always for Mobile) */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center pt-8 pb-12 lg:pb-16 px-6 text-center lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-500 lg:delay-100">
                   {/* Play Button */}
                   <div className="mb-4 lg:mb-6 relative">
                     <div className="absolute inset-0 bg-white/10 rounded-full scale-125 opacity-0 group-hover:opacity-100 transition-all duration-1000 ease-in-out border border-white/20"></div>
