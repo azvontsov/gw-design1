@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 export default function NewsEvents() {
   const originalItems = [
@@ -9,36 +9,36 @@ export default function NewsEvents() {
       category: "Mindfulness",
       title: "A Mindfulness Experience",
       image: "/images/feeling-better.png",
-      link: "#"
+      link: "#",
     },
     {
       id: 2,
       category: "Healing Foods",
       title: "Emergency Chicken Soup: Healing in a Bowl",
       image: "/images/live-well.png",
-      link: "#"
+      link: "#",
     },
     {
       id: 3,
       category: "Long COVID",
       title: "What Can You Do About Long COVID?",
       image: "/images/mindset.png",
-      link: "#"
+      link: "#",
     },
     {
       id: 4,
       category: "NUTRITION",
       title: "Gut Health and its impact on Immunity",
       image: "/images/image3.png",
-      link: "#"
+      link: "#",
     },
     {
       id: 5,
       category: "WELLNESS",
       title: "Modern Acupuncture: Bridging Tradition and Science",
       image: "/images/image4.png",
-      link: "#"
-    }
+      link: "#",
+    },
   ];
 
   // Triple for infinite smooth scroll + manual jumps
@@ -50,11 +50,11 @@ export default function NewsEvents() {
     if (!scrollContainerRef.current) return;
     const container = scrollContainerRef.current;
     const itemWidth = container.offsetWidth / 3;
-    const scrollAmount = direction === 'next' ? itemWidth : -itemWidth;
-    
+    const scrollAmount = direction === "next" ? itemWidth : -itemWidth;
+
     container.scrollBy({
       left: scrollAmount,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
@@ -68,7 +68,7 @@ export default function NewsEvents() {
     const animate = () => {
       if (!isPaused) {
         container.scrollLeft += scrollSpeed;
-        
+
         // Infinite loop logic: Reset to middle set when reaching boundaries
         const totalWidth = container.scrollWidth / 3;
         if (container.scrollLeft >= totalWidth * 2) {
@@ -85,36 +85,58 @@ export default function NewsEvents() {
   }, [isPaused]);
 
   return (
-    <section className="py-16 lg:py-24 bg-[var(--gw-light-blue)] overflow-hidden">
+    <section className="py-16 lg:py-24 bg-white overflow-hidden">
       {/* Header - Stays constrained to site grid */}
       <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-12 2xl:px-24">
         <div className="flex items-end justify-between mb-12 lg:mb-16 px-2">
           <h2 className="text-4xl lg:text-5xl font-serif text-[var(--gw-primary)]">
             News and Events
           </h2>
-          
+
           {/* Navigation Controls */}
           <div className="flex gap-4 mb-2">
-            <button 
-              onClick={() => scroll('prev')}
+            <button
+              onClick={() => scroll("prev")}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               className="w-12 h-12 rounded-full border border-[var(--gw-primary)] flex items-center justify-center text-[var(--gw-primary)] hover:bg-[var(--gw-primary)] hover:text-white transition-all duration-300 group z-20"
               aria-label="Previous slide"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 group-active:-translate-x-1 transition-transform">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-5 h-5 group-active:-translate-x-1 transition-transform"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 19.5L8.25 12l7.5-7.5"
+                />
               </svg>
             </button>
-            <button 
-              onClick={() => scroll('next')}
+            <button
+              onClick={() => scroll("next")}
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               className="w-12 h-12 rounded-full border border-[var(--gw-primary)] flex items-center justify-center text-[var(--gw-primary)] hover:bg-[var(--gw-primary)] hover:text-white transition-all duration-300 group z-20"
               aria-label="Next slide"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5 group-active:translate-x-1 transition-transform">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-5 h-5 group-active:translate-x-1 transition-transform"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                />
               </svg>
             </button>
           </div>
@@ -122,22 +144,22 @@ export default function NewsEvents() {
       </div>
 
       {/* Scroller - Edge to Edge */}
-      <div 
+      <div
         ref={scrollContainerRef}
         className="flex overflow-hidden scroll-smooth relative w-full"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
         {displayItems.map((item, idx) => (
-          <div 
-            key={`${item.id}-${idx}`} 
+          <div
+            key={`${item.id}-${idx}`}
             className="w-[85vw] md:w-[45vw] lg:w-[32vw] flex-shrink-0 px-3 md:px-4"
           >
             <div className="group cursor-pointer flex flex-col h-full bg-transparent">
               {/* Image with proportional scaling */}
               <div className="relative aspect-[16/10] w-full mb-6 overflow-hidden rounded-2xl bg-gray-200">
-                <img 
-                  src={item.image} 
+                <img
+                  src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
@@ -156,19 +178,21 @@ export default function NewsEvents() {
                 </h3>
 
                 {/* Learn More Link */}
-                <div 
-                  className="mt-auto inline-flex items-center text-[#004D49] font-bold text-base leading-6 tracking-normal group/link"
-                >
+                <div className="mt-auto inline-flex items-center text-[#004D49] font-bold text-base leading-6 tracking-normal group/link">
                   <span>Learn more</span>
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    strokeWidth={2.5} 
-                    stroke="currentColor" 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                    stroke="currentColor"
                     className="w-4 h-4 ml-1 transition-transform duration-300 ease-out group-hover/link:translate-x-2"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                    />
                   </svg>
                 </div>
               </div>

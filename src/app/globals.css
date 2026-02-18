@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
-
 :root {
   /* GW Color Palette - Current: Blue-ish */
-  --gw-primary: #1A365D; /* Deep Navy - Main Brand Color */
-  --gw-primary-dark: #102A43; /* Darker Shade for hovers */
-  --gw-secondary: #2B6CB0; /* Professional Blue */
-  --gw-secondary-light: #90CDF4; /* Soft Sky Blue */
-  --gw-light-blue: #EDF7FF; /* Very Light Blue Wash */
-  --gw-ice: #F1F5F9; /* Cool Gray/Ice */
-  --gw-cream: #F8FAFC; /* Clean Cool White */
-  --gw-apricot: #FFEBC7; /* Light Peach (Warmth contrast) */
-  --gw-gold: #ED8936; /* Muted Gold/Orange */
-  --gw-green: #ABCC76; /* Muted Green */
-  --gw-blue: #3182CE; /* Brand Blue */
-  --gw-deep-blue: #2A4365; /* Deep Slate Blue */
-  --gw-slate-blue: #535A67; /* Slate Blue */
-  --gw-powder-blue: #9FABBA; /* Powder Blue */
+  --gw-primary: #1a365d; /* Deep Navy - Main Brand Color */
+  --gw-primary-dark: #102a43; /* Darker Shade for hovers */
+  --gw-secondary: #2b6cb0; /* Professional Blue */
+  --gw-secondary-light: #90cdf4; /* Soft Sky Blue */
+  --gw-light-blue: #edf7ff; /* Very Light Blue Wash */
+  --gw-light-cream: #f3f0eb; /* Light Cream - Main Background */
+  --gw-ice: #f1f5f9; /* Cool Gray/Ice */
+  --gw-cream: #f8fafc; /* Clean Cool White */
+  --gw-apricot: #ffebc7; /* Light Peach (Warmth contrast) */
+  --gw-gold: #ed8936; /* Muted Gold/Orange */
+  --gw-green: #abcc76; /* Muted Green */
+  --gw-blue: #3182ce; /* Brand Blue */
+  --gw-deep-blue: #2a4365; /* Deep Slate Blue */
+  --gw-slate-blue: #535a67; /* Slate Blue */
+  --gw-powder-blue: #9fabba; /* Powder Blue */
   --gw-white: #ffffff;
   --gw-black: #000000;
 
@@ -36,11 +36,11 @@
 
   --background: var(--gw-white);
   --foreground: var(--gw-primary);
-} 
-
+}
 
 @layer base {
-  html, body {
+  html,
+  body {
     font-family: var(--font-ginto), ui-sans-serif, system-ui, sans-serif;
     color: var(--foreground);
     background: var(--background);
@@ -56,7 +56,12 @@
   .font-serif {
     font-family: var(--font-gt-super), ui-serif, system-ui, serif;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-gt-super), ui-serif, system-ui, serif;
   }
 }
@@ -96,8 +101,12 @@
 }
 
 @keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-ticker-smooth {

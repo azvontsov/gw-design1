@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -21,16 +20,17 @@ export default function Home() {
         <NewsEvents />
         <DynamicHero />
         {/* Divider */}
-        <div className="h-[1px] bg-[var(--gw-powder-blue)] mx-4 sm:mx-6 lg:mx-96 2xl:mx-96"></div>
+        {/* <div className="h-[1px] bg-[var(--gw-powder-blue)] mx-4 sm:mx-6 lg:mx-96 2xl:mx-96"></div> */}
+
         <OurServices />
         {/* Divider */}
-        <div className="h-[1px] bg-[var(--gw-powder-blue)] mx-4 sm:mx-6 lg:mx-12 2xl:mx-24"></div>
+        {/* <div className="h-[1px] bg-[var(--gw-powder-blue)] mx-4 sm:mx-6 lg:mx-12 2xl:mx-24"></div> */}
         <Providers />
         {/* Divider */}
         <div className="h-[1px] bg-[var(--gw-powder-blue)] mx-4 sm:mx-6 lg:mx-12 2xl:mx-24"></div>
         <FAQ />
         {/* Divider */}
-        <div className="h-[1px] bg-[var(--gw-powder-blue)] mx-4 sm:mx-6 lg:mx-12 2xl:mx-24"></div>
+        {/* <div className="h-[1px] bg-[var(--gw-powder-blue)] mx-4 sm:mx-6 lg:mx-12 2xl:mx-24"></div> */}
         <Reviews />
       </main>
       <Footer />
